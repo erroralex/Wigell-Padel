@@ -13,9 +13,6 @@ public class Customer {
     @Column(nullable = false, unique = true, length = 50)
     private String username;
 
-    @Column(nullable = false, length = 255)
-    private String password;
-
     @Column(nullable = false, length = 50)
     private String role;
 
@@ -32,9 +29,8 @@ public class Customer {
     protected Customer() {
     }
 
-    public Customer(String username, String password, String role, String firstName, String lastName, Address address) {
+    public Customer(String username, String role, String firstName, String lastName, Address address) {
         this.username = username;
-        this.password = password;
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -51,14 +47,6 @@ public class Customer {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getRole() {

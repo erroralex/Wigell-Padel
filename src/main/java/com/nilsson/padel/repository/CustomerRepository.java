@@ -1,4 +1,7 @@
 package com.nilsson.padel.repository;
 
-public interface CustomerRepository {
+import com.nilsson.padel.entity.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
 }
