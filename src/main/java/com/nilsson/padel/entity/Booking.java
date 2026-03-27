@@ -6,6 +6,22 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ ──────────────────────────────────────────────
+ <h2>Booking</h2>
+ ──────────────────────────────────────────────
+ <p><strong>Ansvar:</strong> Representerar en bokning av en padelbana för en specifik kund, tid och spelomgång.</p>
+ <p><strong>Innehåll:</strong></p>
+ <ul>
+ <li>Koppling till kund och padelbana</li>
+ <li>Bokningsdatum och starttid</li>
+ <li>Antal spelare</li>
+ <li>Totalpris i SEK och EUR</li>
+ </ul>
+ <p><strong>Teknisk roll:</strong> JPA-annoterad entitet som mappas mot databastabellen {@code booking}.</p>
+ ──────────────────────────────────────────────
+
+ */
 @Entity
 @Table(name = "booking")
 public class Booking {

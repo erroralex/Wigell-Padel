@@ -2,6 +2,21 @@ package com.nilsson.padel.entity;
 
 import jakarta.persistence.*;
 
+/**
+ * ──────────────────────────────────────────────
+ * <h2>Address</h2>
+ * ──────────────────────────────────────────────
+ * <p><strong>Ansvar:</strong> Representerar en adress som kan kopplas till en kund i systemet.</p>
+ * <p><strong>Innehåll:</strong></p>
+ * <ul>
+ * <li>Gatunamn</li>
+ * <li>Stad</li>
+ * <li>Postnummer</li>
+ * <li>Land</li>
+ * </ul>
+ * <p><strong>Teknisk roll:</strong> JPA-annoterad entitet som mappas mot databastabellen {@code address}.</p>
+ * ──────────────────────────────────────────────
+ */
 @Entity
 @Table(name = "address")
 public class Address {

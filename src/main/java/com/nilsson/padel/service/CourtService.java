@@ -8,6 +8,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * ──────────────────────────────────────────────
+ * <h2>CourtService</h2>
+ * ──────────────────────────────────────────────
+ * <p><strong>Ansvar:</strong> Hanterar affärslogik för padelbanor, inklusive registrering, uppdatering, hämtning och borttagning.</p>
+ * <p><strong>Funktioner:</strong></p>
+ * <ul>
+ * <li>Hämtar en eller flera padelbanor</li>
+ * <li>Skapar och uppdaterar baninformation</li>
+ * <li>Raderar befintliga banor</li>
+ * <li>Validerar att efterfrågad bana existerar</li>
+ * </ul>
+ * <p><strong>Teknisk roll:</strong> Spring {@code @Service} som använder repository-lagret och mappar mellan entitet och {@code CourtRecord}.</p>
+ * ──────────────────────────────────────────────
+ */
 @Service
 public class CourtService {
 

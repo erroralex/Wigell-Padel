@@ -12,6 +12,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * ──────────────────────────────────────────────
+ * <h2>CustomerService</h2>
+ * ──────────────────────────────────────────────
+ * <p><strong>Ansvar:</strong> Hanterar affärslogik för kunder och deras adresser, inklusive registrering, uppdatering, hämtning och borttagning.</p>
+ * <p><strong>Funktioner:</strong></p>
+ * <ul>
+ * <li>Skapar, uppdaterar och hämtar kundinformation</li>
+ * <li>Kopplar kunder till befintliga eller nya adresser</li>
+ * <li>Validerar att kund och adress existerar</li>
+ * <li>Förhindrar ogiltig borttagning av kundens enda adress</li>
+ * </ul>
+ * <p><strong>Teknisk roll:</strong> Spring {@code @Service} som samordnar repositories samt mappar mellan entiteter och kundrelaterade DTO:er.</p>
+ * ──────────────────────────────────────────────
+ */
 @Service
 public class CustomerService {
 

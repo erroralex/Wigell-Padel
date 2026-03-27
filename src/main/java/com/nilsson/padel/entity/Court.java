@@ -4,6 +4,22 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
+/**
+ * ──────────────────────────────────────────────
+ * <h2>Court</h2>
+ * ──────────────────────────────────────────────
+ * <p><strong>Ansvar:</strong> Representerar en padelbana i systemet.</p>
+ * <p><strong>Innehåll:</strong></p>
+ * <ul>
+ * <li>Unikt ID</li>
+ * <li>Namn på banan (unika och max 50 tecken)</li>
+ * <li>Valfri beskrivning</li>
+ * <li>Anger om banan är inomhus</li>
+ * <li>Pris per timme i SEK</li>
+ * </ul>
+ * <p><strong>Teknisk roll:</strong> JPA-annoterad entitet som mappas mot databastabellen {@code court}.</p>
+ * ──────────────────────────────────────────────
+ */
 @Entity
 @Table(name = "court")
 public class Court {

@@ -16,6 +16,21 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
+/**
+ * ──────────────────────────────────────────────
+ * <h2>BookingService</h2>
+ * ──────────────────────────────────────────────
+ * <p><strong>Ansvar:</strong> Hanterar affärslogik för bokningar av padelbanor, inklusive skapande, uppdatering, hämtning och radering.</p>
+ * <p><strong>Funktioner:</strong></p>
+ * <ul>
+ * <li>Skapar och uppdaterar bokningar för kund och bana</li>
+ * <li>Beräknar totalpris i SEK och konverterar till EUR</li>
+ * <li>Hämtar enskilda bokningar, kunders bokningar eller alla bokningar</li>
+ * <li>Validerar att kund, bana och bokning existerar</li>
+ * </ul>
+ * <p><strong>Teknisk roll:</strong> Spring {@code @Service} som samordnar repositories, DTO-mappning och valutakonvertering via extern klient.</p>
+ * ──────────────────────────────────────────────
+ */
 @Service
 public class BookingService {
 

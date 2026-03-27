@@ -9,6 +9,21 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+/**
+ * ──────────────────────────────────────────────
+ * <h2>CourtController</h2>
+ * ──────────────────────────────────────────────
+ * <p><strong>Ansvar:</strong> Exponerar REST-endpoints för hantering av padelbanor i systemet.</p>
+ * <p><strong>Funktioner:</strong></p>
+ * <ul>
+ * <li>Hämtar en eller flera padelbanor</li>
+ * <li>Skapar nya banor och uppdaterar befintliga</li>
+ * <li>Raderar banor via API</li>
+ * <li>Skyddar samtliga endpoints med administratörsbehörighet</li>
+ * </ul>
+ * <p><strong>Teknisk roll:</strong> Spring {@code @RestController} som hanterar HTTP-anrop och delegerar affärslogik till {@code CourtService}.</p>
+ * ──────────────────────────────────────────────
+ */
 @RestController
 @RequestMapping("/api/v1/courts")
 public class CourtController {
