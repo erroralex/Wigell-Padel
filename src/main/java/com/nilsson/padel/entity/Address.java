@@ -22,13 +22,14 @@ public class Address {
     @Column(name = "country", nullable = false, length = 50)
     private String country;
 
-    protected Address() {
+    public Address() {
     }
 
     public Address(String streetName, String city, String zipCode, String country) {
         this.streetName = streetName;
         this.city = city;
         this.zipCode = zipCode;
+        this.country = country;
     }
 
     public Long getId() {

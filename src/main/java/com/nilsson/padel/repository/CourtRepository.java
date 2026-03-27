@@ -1,4 +1,7 @@
 package com.nilsson.padel.repository;
 
-public interface CourtRepository {
+import com.nilsson.padel.entity.Court;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CourtRepository extends JpaRepository<Court, Long> {
 }

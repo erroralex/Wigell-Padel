@@ -1,4 +1,74 @@
 package com.nilsson.padel.service;
 
+import com.groupc.shared.exception.ResourceNotFoundException;
+import com.nilsson.padel.dto.CourtRecord;
+import com.nilsson.padel.entity.Court;
+import com.nilsson.padel.repository.CourtRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
 public class CourtService {
+
+    private final CourtRepository courtRepository;
+
+    public CourtService(CourtRepository courtRepository) {
+        this.courtRepository = courtRepository;
+    }
+
+    public List<CourtRecord> getAllCourts() {
+        return courtRepository.findAll().stream()
+                .map(this::mapToRecord)
+                .toList();
+    }
+
+    public CourtRecord getCourtById(Long id) {
+        Court court = courtRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Padelbana med ID " + id + " hittades inte i systemet."));
+
+        return mapToRecord(court);
+    }
+
+    public CourtRecord createCourt(CourtRecord request) {
+        Court newCourt = new Court(
+                request.name(),
+                request.description(),
+                request.isIndoor(),
+                request.pricePerHourSek()
+        );
+
+        Court savedCourt = courtRepository.save(newCourt);
+        return mapToRecord(savedCourt);
+    }
+
+    public CourtRecord updateCourt(Long id, CourtRecord request) {
+        Court existingCourt = courtRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Kunde inte uppdatera: Padelbana med ID " + id + " hittades inte."));
+
+        existingCourt.setName(request.name());
+        existingCourt.setDescription(request.description());
+        existingCourt.setIndoor(request.isIndoor());
+        existingCourt.setPrice(request.pricePerHourSek());
+
+        Court updatedCourt = courtRepository.save(existingCourt);
+        return mapToRecord(updatedCourt);
+    }
+
+    public void deleteCourt(Long id) {
+        if (!courtRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Kunde inte radera: Padelbana med ID " + id + " hittades inte.");
+        }
+        courtRepository.deleteById(id);
+    }
+
+    private CourtRecord mapToRecord(Court court) {
+        return new CourtRecord(
+                court.getId(),
+                court.getName(),
+                court.getDescription(),
+                court.isIndoor(),
+                court.getPrice()
+        );
+    }
 }

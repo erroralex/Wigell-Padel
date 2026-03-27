@@ -18,7 +18,6 @@ CREATE TABLE customer
 (
     id         BIGINT AUTO_INCREMENT PRIMARY KEY,
     username   VARCHAR(50)  NOT NULL UNIQUE,
-    password   VARCHAR(255) NOT NULL,
     role       VARCHAR(50)  NOT NULL,
     first_name VARCHAR(100) NOT NULL,
     last_name  VARCHAR(100) NOT NULL,
@@ -54,12 +53,12 @@ VALUES ('Padelgatan 1', 'Stockholm', '11122', 'Sverige'),
        ('Tennisvägen 5', 'Göteborg', '41233', 'Sverige'),
        ('Sportgränd 9', 'Malmö', '21144', 'Sverige');
 
-INSERT INTO customer (username, password, role, first_name, last_name, address_id)
-VALUES ('admin', '$2a$12$RO1N6wQ1kFkYmG5iCjN/V.D4V1tN/g5RzR/O9U7fW8E.l8VpZ/QOO', 'ROLE_ADMIN', 'Boss', 'Wigell', 1),
-       ('anna99', '$2a$12$RO1N6wQ1kFkYmG5iCjN/V.D4V1tN/g5RzR/O9U7fW8E.l8VpZ/QOO', 'ROLE_USER', 'Anna', 'Andersson', 1),
-       ('bjorn_p', '$2a$12$RO1N6wQ1kFkYmG5iCjN/V.D4V1tN/g5RzR/O9U7fW8E.l8VpZ/QOO', 'ROLE_USER', 'Björn', 'Borg', 2),
-       ('cecilia', '$2a$12$RO1N6wQ1kFkYmG5iCjN/V.D4V1tN/g5RzR/O9U7fW8E.l8VpZ/QOO', 'ROLE_USER', 'Cecilia', 'Lind', 3),
-       ('david_d', '$2a$12$RO1N6wQ1kFkYmG5iCjN/V.D4V1tN/g5RzR/O9U7fW8E.l8VpZ/QOO', 'ROLE_USER', 'David', 'Dalin', 2);
+INSERT INTO customer (username, role, first_name, last_name, address_id)
+VALUES ('admin', 'ROLE_ADMIN', 'Boss', 'Wigell', 1),
+       ('anna99', 'ROLE_USER', 'Anna', 'Andersson', 1),
+       ('bjorn_p', 'ROLE_USER', 'Björn', 'Borg', 2),
+       ('cecilia', 'ROLE_USER', 'Cecilia', 'Lind', 3),
+       ('david_d', 'ROLE_USER', 'David', 'Dalin', 2);
 
 INSERT INTO court (name, description, is_indoor, price_per_hour_sek)
 VALUES ('Court 1 - Panorama', 'Inomhusbana med panoramaglas', TRUE, 400.00),
