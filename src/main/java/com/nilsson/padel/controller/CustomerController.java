@@ -11,6 +11,21 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+/**
+ * ──────────────────────────────────────────────
+ * <h2>CustomerController</h2>
+ * ──────────────────────────────────────────────
+ * <p><strong>Ansvar:</strong> Exponerar REST-endpoints för administration av kunder och deras adresser.</p>
+ * <p><strong>Funktioner:</strong></p>
+ * <ul>
+ * <li>Hämtar, skapar, uppdaterar och raderar kunder</li>
+ * <li>Hantera koppling av adresser till specifika kunder</li>
+ * <li>Tar emot och returnerar kundrelaterade DTO:er via API</li>
+ * <li>Skyddar hela kontrollern med administratörsbehörighet</li>
+ * </ul>
+ * <p><strong>Teknisk roll:</strong> Spring {@code @RestController} som hanterar HTTP-anrop och delegerar affärslogik till {@code CustomerService}.</p>
+ * ──────────────────────────────────────────────
+ */
 @RestController
 @RequestMapping("/api/v1/customers")
 @PreAuthorize("hasRole('ADMIN')")

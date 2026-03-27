@@ -10,6 +10,21 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+/**
+ * ──────────────────────────────────────────────
+ * <h2>BookingController</h2>
+ * ──────────────────────────────────────────────
+ * <p><strong>Ansvar:</strong> Exponerar REST-endpoints för att skapa, uppdatera, hämta och radera bokningar i systemet.</p>
+ * <p><strong>Funktioner:</strong></p>
+ * <ul>
+ * <li>Tar emot bokningsrelaterade API-anrop</li>
+ * <li>Hanterar skapande, uppdatering och hämtning av bokningar</li>
+ * <li>Stödjer filtrering av bokningar per kund</li>
+ * <li>Skyddar endpoints med rollbaserad behörighetskontroll</li>
+ * </ul>
+ * <p><strong>Teknisk roll:</strong> Spring {@code @RestController} som samverkar med {@code BookingService} och returnerar standardiserade HTTP-svar.</p>
+ * ──────────────────────────────────────────────
+ */
 @RestController
 @RequestMapping("/api/v1/bookings")
 public class BookingController {

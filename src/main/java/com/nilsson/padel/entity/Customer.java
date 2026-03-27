@@ -2,6 +2,22 @@ package com.nilsson.padel.entity;
 
 import jakarta.persistence.*;
 
+/**
+ * ──────────────────────────────────────────────
+ * <h2>Customer</h2>
+ * ──────────────────────────────────────────────
+ * <p><strong>Ansvar:</strong> Representerar en kund i systemet.</p>
+ * <p><strong>Innehåll:</strong></p>
+ * <ul>
+ * <li>Unikt ID</li>
+ * <li>Användarnamn (unika och max 50 tecken)</li>
+ * <li>Roll i systemet</li>
+ * <li>Förnamn och efternamn</li>
+ * <li>Adress kopplad via {@link Address}</li>
+ * </ul>
+ * <p><strong>Teknisk roll:</strong> JPA-annoterad entitet som mappas mot databastabellen {@code customer}.</p>
+ * ──────────────────────────────────────────────
+ */
 @Entity
 @Table(name = "customer")
 public class Customer {
