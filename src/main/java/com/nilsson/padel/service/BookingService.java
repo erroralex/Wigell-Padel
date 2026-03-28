@@ -10,6 +10,8 @@ import com.nilsson.padel.entity.Customer;
 import com.nilsson.padel.repository.BookingRepository;
 import com.nilsson.padel.repository.CourtRepository;
 import com.nilsson.padel.repository.CustomerRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -39,6 +41,8 @@ public class BookingService {
     private final CourtRepository courtRepository;
     private final CurrencyClient currencyClient;
 
+    private final static Logger logger = LoggerFactory.getLogger(BookingService.class);
+
     public BookingService(BookingRepository bookingRepository,
                           CustomerRepository customerRepository,
                           CourtRepository courtRepository,
@@ -51,6 +55,10 @@ public class BookingService {
     }
 
     public BookingResponse createBooking(BookingRequest request) {
+
+        logger.info("Skapar ny bokning: Kund={}, Bana={}, Datum={}",
+                request.customerId(), request.courtId(), request.bookingDate());
+
         Customer customer = customerRepository.findById(request.customerId())
                 .orElseThrow(() -> new ResourceNotFoundException("Kund med ID " + request.customerId() + " hittades inte."));
 
@@ -58,8 +66,14 @@ public class BookingService {
                 .orElseThrow(() -> new ResourceNotFoundException("Padelbana med ID " + request.courtId() + " hittades inte."));
 
         BigDecimal priceSek = court.getPrice();
+
+        logger.debug("Anropar valutatjänst för konvertering SEK -> EUR");
         double exchangeRate = currencyClient.getExchangeRate("SEK", "EUR");
+
         BigDecimal priceEur = priceSek.multiply(BigDecimal.valueOf(exchangeRate)).setScale(2, RoundingMode.HALF_UP);
+        logger.info("Bokar bana {} för kund {}. Pris: {} SEK. Växelkurs: {}",
+                request.courtId(), request.customerId(), priceSek, exchangeRate);
+
 
         Booking newBooking = new Booking(
                 customer,
@@ -69,13 +83,19 @@ public class BookingService {
                 request.numberOfPlayers(),
                 priceSek
         );
+
         newBooking.setTotalPriceEuro(priceEur);
 
         Booking savedBooking = bookingRepository.save(newBooking);
+
+        logger.info("Bokning sparad med ID: {}", savedBooking.getId());
+
         return mapToResponse(savedBooking);
     }
 
     public BookingResponse updateBooking(Long id, BookingRequest request) {
+        logger.info("Uppdaterar bokning ID: {}", id);
+
         Booking existingBooking = bookingRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Bokning med ID " + id + " hittades inte."));
 
@@ -84,6 +104,8 @@ public class BookingService {
         existingBooking.setNumberOfPlayers(request.numberOfPlayers());
 
         if (!existingBooking.getCourt().getId().equals(request.courtId())) {
+            logger.info("Byte av bana upptäckt i bokning {}. Beräknar om pris.", id);
+
             Court newCourt = courtRepository.findById(request.courtId())
                     .orElseThrow(() -> new ResourceNotFoundException("Ny padelbana med ID " + request.courtId() + " hittades inte."));
 
@@ -95,6 +117,8 @@ public class BookingService {
 
             existingBooking.setTotalPriceSek(newPriceSek);
             existingBooking.setTotalPriceEuro(newPriceEur);
+
+            logger.debug("Nytt pris för bokning {}: {} SEK", id, newPriceSek);
         }
 
         Booking updatedBooking = bookingRepository.save(existingBooking);
@@ -102,12 +126,16 @@ public class BookingService {
     }
 
     public BookingResponse getBookingById(Long id) {
+        logger.info("Hämtar bokning med ID: {}", id);
+
         Booking booking = bookingRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Bokning med ID " + id + " hittades inte."));
         return mapToResponse(booking);
     }
 
     public List<BookingResponse> getBookingsByCustomer(Long customerId) {
+        logger.info("Hämtar alla bokningar för kund: {}", customerId);
+
         if (!customerRepository.existsById(customerId)) {
             throw new ResourceNotFoundException("Kund med ID " + customerId + " hittades inte.");
         }
@@ -117,16 +145,20 @@ public class BookingService {
     }
 
     public List<BookingResponse> getAllBookings() {
+        logger.info("Hämtar alla bokningar: ");
         return bookingRepository.findAll().stream()
                 .map(this::mapToResponse)
                 .toList();
     }
 
     public void deleteBooking(Long id) {
+        logger.warn("Raderar bokning med ID: {}", id);
+
         if (!bookingRepository.existsById(id)) {
             throw new ResourceNotFoundException("Kunde inte radera: Bokning med ID " + id + " hittades inte.");
         }
         bookingRepository.deleteById(id);
+        logger.info("Bokning {} raderad framgångsrikt.", id);
     }
 
     private BookingResponse mapToResponse(Booking booking) {

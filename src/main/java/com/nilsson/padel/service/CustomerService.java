@@ -8,6 +8,8 @@ import com.nilsson.padel.entity.Address;
 import com.nilsson.padel.entity.Customer;
 import com.nilsson.padel.repository.AddressRepository;
 import com.nilsson.padel.repository.CustomerRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,11 +35,14 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final AddressRepository addressRepository;
 
+    private final static Logger logger = LoggerFactory.getLogger(CustomerService.class);
+
     public CustomerService(CustomerRepository customerRepository, AddressRepository addressRepository) {
         this.customerRepository = customerRepository;
         this.addressRepository = addressRepository;
     }
 
+    // TODO: Logger och exceptionhantering
     public List<CustomerResponse> getAllCustomers() {
         return customerRepository.findAll().stream()
                 .map(this::mapToResponse)
@@ -50,6 +55,7 @@ public class CustomerService {
         return mapToResponse(customer);
     }
 
+    // TODO: Logger och exceptionhantering
     public CustomerResponse createCustomer(CustomerRequest request) {
         Address address = addressRepository.findById(request.addressId())
                 .orElseThrow(() -> new ResourceNotFoundException("Adress med ID " + request.addressId() + " hittades inte."));
@@ -65,6 +71,7 @@ public class CustomerService {
         return mapToResponse(customerRepository.save(customer));
     }
 
+    // TODO: Logger och exceptionhantering
     public CustomerResponse updateCustomer(Long id, CustomerRequest request) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Kund med ID " + id + " hittades inte."));
@@ -81,6 +88,7 @@ public class CustomerService {
         return mapToResponse(customerRepository.save(customer));
     }
 
+    // TODO: Logger och exceptionhantering
     public void deleteCustomer(Long id) {
         if (!customerRepository.existsById(id)) {
             throw new ResourceNotFoundException("Kunde inte radera: Kund med ID " + id + " hittades inte.");
@@ -88,6 +96,7 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
+    // TODO: Logger och exceptionhantering
     public CustomerResponse createAddressForCustomer(Long customerId, AddressRecord request) {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Kund med ID " + customerId + " hittades inte."));
@@ -103,6 +112,7 @@ public class CustomerService {
         return mapToResponse(customerRepository.save(customer));
     }
 
+    // TODO: Logger och exceptionhantering
     public void deleteAddressFromCustomer(Long customerId, Long addressId) {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Kund med ID " + customerId + " hittades inte."));

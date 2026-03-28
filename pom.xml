@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.nilsson</groupId>
-    <artifactId>Wigell-Paddel</artifactId>
+    <artifactId>Wigell-Padel</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -52,6 +52,13 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>3.2.3</version>
+        </dependency>
+
     </dependencies>
 
 </project>

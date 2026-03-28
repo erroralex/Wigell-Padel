@@ -5,6 +5,8 @@ import com.nilsson.padel.dto.AvailableTimeResponse;
 import com.nilsson.padel.entity.Booking;
 import com.nilsson.padel.repository.BookingRepository;
 import com.nilsson.padel.repository.CourtRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -32,6 +34,8 @@ public class AvailabilityService {
     private final BookingRepository bookingRepository;
     private final CourtRepository courtRepository;
 
+    private final static Logger logger = LoggerFactory.getLogger(AvailabilityService.class);
+
     private static final LocalTime OPENING_TIME = LocalTime.of(8, 0);
     private static final LocalTime CLOSING_TIME = LocalTime.of(22, 0);
 
@@ -41,6 +45,8 @@ public class AvailabilityService {
     }
 
     public List<AvailableTimeResponse> getAvailableTimes(LocalDate date, Long courtId) {
+        logger.info("Hämtar alla lediga tider för bana {} för datum {}", courtId, date);
+
         if (!courtRepository.existsById(courtId)) {
             throw new ResourceNotFoundException("Padelbana med ID " + courtId + " hittades inte.");
         }
