@@ -21,12 +21,17 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/wigell-realm # Justera Realm efter teamets Keycloak-setup
+          issuer-uri: http://localhost:8180/realms/wigell-realm
 
-# Valutatjänstens URL (Krävs av CurrencyClient i shared-lib)
+  boot:
+    admin:
+      client:
+        url: http://localhost:8081
+
+# Valutatjänstens URL
 wigell:
   currency:
-    url: http://localhost:8580
+    url: http://localhost:8080/currency
 
 # Actuator-konfiguration (Krav för Dashboard)
 management:
@@ -37,3 +42,9 @@ management:
   info:
     env:
       enabled: true
+
+logging:
+  level:
+    root: INFO
+    com.nilsson.padel: DEBUG
+    com.groupc.shared: DEBUG

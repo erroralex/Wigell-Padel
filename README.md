@@ -12,9 +12,9 @@ Projektet är integrerat med teamets gemensamma bibliotek (`wigell-shared-lib`) 
 
 ---
 
-## 🧩 Funktioner (Endpoints)
+## Funktioner (Endpoints)
 
-### 🎾 Padelbanor (Courts)
+### Padelbanor (Courts)
 *Kräver rollen `ADMIN`*
 
 | Metod  | Endpoint               | Beskrivning                                  |
@@ -25,7 +25,7 @@ Projektet är integrerat med teamets gemensamma bibliotek (`wigell-shared-lib`) 
 | `PUT`  | `/api/v1/courts/{id}`  | Uppdaterar information för en specifik bana  |
 | `DELETE`| `/api/v1/courts/{id}` | Tar bort en padelbana                        |
 
-### 👥 Kunder (Customers & Addresses)
+### Kunder (Customers & Addresses)
 *Kräver rollen `ADMIN`*
 
 | Metod  | Endpoint                                     | Beskrivning                                      |
@@ -37,7 +37,7 @@ Projektet är integrerat med teamets gemensamma bibliotek (`wigell-shared-lib`) 
 | `POST` | `/api/v1/customers/{id}/addresses`           | Lägga till en ny adress för specifik kund        |
 | `DELETE`| `/api/v1/customers/{id}/addresses/{addrId}` | Ta bort en specifik adress från en kund          |
 
-### 📅 Bokningar (Bookings)
+### Bokningar (Bookings)
 *Gemensamma endpoints för `USER` och `ADMIN`*
 
 | Metod   | Endpoint                                   | Beskrivning                                                |
@@ -54,7 +54,7 @@ Projektet är integrerat med teamets gemensamma bibliotek (`wigell-shared-lib`) 
 | `GET`   | `/api/v1/bookings/{id}`| Hämta enskild bokning                        |
 | `DELETE`| `/api/v1/bookings/{id}`| Ta bort en specifik bokning                  |
 
-### 🕒 Tillgänglighet (Availability)
+### Tillgänglighet (Availability)
 *Gemensam endpoint för `USER` och `ADMIN`*
 
 | Metod  | Endpoint                                               | Beskrivning                                      |
@@ -63,7 +63,7 @@ Projektet är integrerat med teamets gemensamma bibliotek (`wigell-shared-lib`) 
 
 ---
 
-## 🗄️ Datamodell
+##  Datamodell
 
 Systemet är normaliserat och använder JPA/Hibernate för databasabstraktion. *(Lösenordshantering är bortkopplad då autentisering sker externt via Keycloak).*
 
@@ -88,7 +88,7 @@ En kund (`Customer`) har en Många-till-En relation till `Address`.
 
 ---
 
-## 🔐 Säkerhet (Keycloak OAuth2)
+## Säkerhet (Keycloak OAuth2)
 
 API:et är skyddat som en **OAuth2 Resource Server** via Spring Security. Det litar på JWT-tokens utfärdade av teamets Keycloak-server.
 
@@ -102,7 +102,7 @@ Autentiseringsuppgifter skickas med som en **Bearer Token** i headern:
 
 ---
 
-## 🚀 Kom igång
+## Kom igång
 
 ### Krav
 * Java 24
@@ -126,7 +126,7 @@ Applikationen startar på http://localhost:8584.
 
 ---
 
-## 🧪 Testning med Postman
+## Testning med Postman
 
 All kommunikation med API:et sker via **Postman**. Säkerställ att du hämtat en token från er Keycloak-instans innan du skickar anrop.
 
@@ -152,7 +152,7 @@ Authorization: Bearer <din_jwt_token>
 ```
 ---
 
-## ⚠️ Felhantering
+## Felhantering
 
 Felhanteringen dirigeras genom teamets gemensamma `GlobalExceptionHandler` i `shared-lib` och returnerar standardiserade JSON-svar med följande statuskoder:
 
@@ -167,7 +167,7 @@ Felhanteringen dirigeras genom teamets gemensamma `GlobalExceptionHandler` i `sh
 
 ---
 
-## 🛠️ Teknisk stack
+##️ Teknisk stack
 
 * **Java 24** – Backend-språk, använder *Virtual Threads* för blixtsnabba externa HTTP-anrop.
 * **Spring Boot 3.x** – Ramverk för REST-API och Dependency Injection.
@@ -179,7 +179,7 @@ Felhanteringen dirigeras genom teamets gemensamma `GlobalExceptionHandler` i `sh
 
 ---
 
-## 📜 Licens
+## Licens
 
 Distribueras under **MIT-licensen**. Fri för personligt och kommersiellt bruk.
 
