@@ -36,7 +36,7 @@ public class BookingController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<BookingResponse> createBooking(@RequestBody BookingRequest request) {
         BookingResponse createdBooking = bookingService.createBooking(request);
         URI location = URI.create("/api/v1/bookings/" + createdBooking.id());
@@ -44,7 +44,7 @@ public class BookingController {
     }
 
     @PatchMapping("/{id}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<BookingResponse> updateBooking(
             @PathVariable Long id,
             @RequestBody BookingRequest request) {
@@ -53,7 +53,7 @@ public class BookingController {
     }
 
     @GetMapping(params = "customerId")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<List<BookingResponse>> getBookingsByCustomer(@RequestParam Long customerId) {
         return ResponseEntity.ok(bookingService.getBookingsByCustomer(customerId));
     }

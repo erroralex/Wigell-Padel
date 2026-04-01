@@ -1,0 +1,1 @@
+Mappa användare till keycloak-inloggning.

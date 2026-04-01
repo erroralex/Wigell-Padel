@@ -42,21 +42,23 @@ public class CustomerService {
         this.addressRepository = addressRepository;
     }
 
-    // TODO: Logger och exceptionhantering
     public List<CustomerResponse> getAllCustomers() {
+        logger.info("Hämtar alla kunder:");
         return customerRepository.findAll().stream()
                 .map(this::mapToResponse)
                 .toList();
     }
 
     public CustomerResponse getCustomerById(Long id) {
+        logger.info("Hämtar kund med ID: {}", id);
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Kund med ID " + id + " hittades inte."));
         return mapToResponse(customer);
     }
 
-    // TODO: Logger och exceptionhantering
     public CustomerResponse createCustomer(CustomerRequest request) {
+        logger.info("Skapar ny kund: {}", request.username());
+
         Address address = addressRepository.findById(request.addressId())
                 .orElseThrow(() -> new ResourceNotFoundException("Adress med ID " + request.addressId() + " hittades inte."));
 
@@ -68,11 +70,13 @@ public class CustomerService {
                 address
         );
 
+        logger.info("Kund {} skapad framgångsrikt.", customer.getUsername());
         return mapToResponse(customerRepository.save(customer));
     }
 
-    // TODO: Logger och exceptionhantering
     public CustomerResponse updateCustomer(Long id, CustomerRequest request) {
+        logger.info("Uppdaterar kund med ID: {}", id);
+
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Kund med ID " + id + " hittades inte."));
 
@@ -85,19 +89,23 @@ public class CustomerService {
         customer.setLastName(request.lastName());
         customer.setAddress(newAddress);
 
+        logger.info("Kund {} uppdaterad framgångsrikt.", customer.getUsername());
         return mapToResponse(customerRepository.save(customer));
     }
 
-    // TODO: Logger och exceptionhantering
     public void deleteCustomer(Long id) {
+        logger.warn("Raderar kund med ID: {}", id);
+
         if (!customerRepository.existsById(id)) {
             throw new ResourceNotFoundException("Kunde inte radera: Kund med ID " + id + " hittades inte.");
         }
         customerRepository.deleteById(id);
+        logger.info("Kund {} raderad framgångsrikt.", id);
     }
 
-    // TODO: Logger och exceptionhantering
     public CustomerResponse createAddressForCustomer(Long customerId, AddressRecord request) {
+        logger.info("Lägger till ny adress till kund med ID: {}", customerId);
+
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Kund med ID " + customerId + " hittades inte."));
 
@@ -109,18 +117,26 @@ public class CustomerService {
         Address savedAddress = addressRepository.save(newAddress);
 
         customer.setAddress(savedAddress);
+
+        logger.info("Kund {} uppdaterad framgångsrikt.", customer.getUsername());
         return mapToResponse(customerRepository.save(customer));
     }
 
-    // TODO: Logger och exceptionhantering
     public void deleteAddressFromCustomer(Long customerId, Long addressId) {
+        logger.warn("Försöker radera adress med ID: {} för kund: {}", addressId, customerId);
+
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Kund med ID " + customerId + " hittades inte."));
 
-        if (!customer.getAddress().getId().equals(addressId)) {
+        if (customer.getAddress() == null || !customer.getAddress().getId().equals(addressId)) {
             throw new IllegalArgumentException("Adressen tillhör inte denna kund.");
         }
-        throw new IllegalStateException("Kunden måste ha minst en adress. Vänligen uppdatera kunden med en ny adress istället för att radera den.");
+
+        customer.setAddress(null);
+
+        customerRepository.save(customer);
+
+        logger.info("Adress {} raderad från kund {}", addressId, customerId);
     }
 
     private CustomerResponse mapToResponse(Customer customer) {

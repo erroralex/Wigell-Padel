@@ -1,7 +1,9 @@
 DROP
     DATABASE IF EXISTS wigell_padel_db;
+
 CREATE
     DATABASE wigell_padel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 USE
     wigell_padel_db;
 

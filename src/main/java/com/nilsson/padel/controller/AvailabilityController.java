@@ -35,7 +35,7 @@ public class AvailabilityController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<List<AvailableTimeResponse>> getAvailability(
             @RequestParam LocalDate date,
             @RequestParam Long courtId) {
