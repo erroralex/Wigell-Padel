@@ -55,12 +55,14 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
         customerService.deleteCustomer(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{customerId}/addresses")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CustomerResponse> addAddressToCustomer(
             @PathVariable Long customerId,
             @RequestBody AddressRecord request) {
@@ -71,6 +73,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{customerId}/addresses/{addressId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteAddressFromCustomer(
             @PathVariable Long customerId,
             @PathVariable Long addressId) {

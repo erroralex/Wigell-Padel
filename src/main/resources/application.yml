@@ -16,7 +16,6 @@ spring:
       ddl-auto: update
     show-sql: false
 
-  # Keycloak-integration (Krävs av SharedSecurityConfig i shared-lib)
   security:
     oauth2:
       resourceserver:
@@ -28,12 +27,10 @@ spring:
       client:
         url: http://localhost:8081
 
-# Valutatjänstens URL
 wigell:
   currency:
     url: http://localhost:8080/currency
 
-# Actuator-konfiguration (Krav för Dashboard)
 management:
   endpoints:
     web:
