@@ -6,7 +6,7 @@ spring:
     name: wigell-padel
 
   datasource:
-    url: jdbc:mysql://localhost:3306/wigell_padel_db?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/wigell_padel_db
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
