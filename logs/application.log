@@ -1,21 +1,21 @@
-2026-04-01 08:22:21 [main] INFO  com.nilsson.padel.PadelApplication - Starting PadelApplication using Java 24.0.2 with PID 37148 (C:\Users\error\IdeaProjects\Inlamningsuppgifter\Microservices\Wigell-Paddel\target\classes started by error in C:\Users\error\IdeaProjects\Inlamningsuppgifter\Microservices\Wigell-Paddel)
-2026-04-01 08:22:21 [main] DEBUG com.nilsson.padel.PadelApplication - Running with Spring Boot v3.5.4, Spring v6.2.9
-2026-04-01 08:22:21 [main] INFO  com.nilsson.padel.PadelApplication - No active profile set, falling back to 1 default profile: "default"
-2026-04-01 08:22:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-04-01 08:22:22 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 4 JPA repository interfaces.
-2026-04-01 08:22:22 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8584 (http)
-2026-04-01 08:22:22 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-04-01 08:22:22 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
-2026-04-01 08:22:22 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-04-01 08:22:22 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1307 ms
-2026-04-01 08:22:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-04-01 08:22:23 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5a90fcaa
-2026-04-01 08:22:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-04-01 08:22:23 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-04-01 08:22:23 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.22.Final
-2026-04-01 08:22:23 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-04-01 08:22:23 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-04-01 08:22:23 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+2026-04-02 08:13:06 [main] INFO  com.nilsson.padel.PadelApplication - Starting PadelApplication using Java 24.0.2 with PID 33700 (C:\Users\error\IdeaProjects\Inlamningsuppgifter\Microservices\Wigell-Paddel\target\classes started by error in C:\Users\error\IdeaProjects\Inlamningsuppgifter\Microservices\Wigell-Paddel)
+2026-04-02 08:13:06 [main] DEBUG com.nilsson.padel.PadelApplication - Running with Spring Boot v3.5.4, Spring v6.2.9
+2026-04-02 08:13:06 [main] INFO  com.nilsson.padel.PadelApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-02 08:13:07 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-02 08:13:07 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 37 ms. Found 4 JPA repository interfaces.
+2026-04-02 08:13:08 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8584 (http)
+2026-04-02 08:13:08 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-02 08:13:08 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2026-04-02 08:13:08 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-04-02 08:13:08 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1424 ms
+2026-04-02 08:13:08 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-02 08:13:08 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1530d0f2
+2026-04-02 08:13:08 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-02 08:13:08 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-02 08:13:09 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.22.Final
+2026-04-02 08:13:09 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-04-02 08:13:09 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-02 08:13:09 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 8.0.44
@@ -23,36 +23,25 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-04-01 08:22:24 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-04-01 08:22:24 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-04-01 08:22:24 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-04-01 08:22:25 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoints beneath base path '/actuator'
-2026-04-01 08:22:25 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8584 (http) with context path '/'
-2026-04-01 08:22:25 [main] INFO  com.nilsson.padel.PadelApplication - Started PadelApplication in 4.57 seconds (process running for 4.878)
-2026-04-01 08:22:25 [registrationTask1] INFO  d.c.b.a.c.r.ApplicationRegistrator - Application registered itself as be20dc102f01
-2026-04-01 08:22:25 [http-nio-8584-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-04-01 08:22:25 [http-nio-8584-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-04-01 08:22:25 [http-nio-8584-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
-2026-04-01 08:23:40 [http-nio-8584-exec-14] INFO  c.nilsson.padel.service.CourtService - Hämtar alla banor:
-2026-04-01 08:24:02 [http-nio-8584-exec-1] INFO  c.n.padel.service.CustomerService - Skapar ny kund: kalle_anka
-2026-04-01 08:24:02 [http-nio-8584-exec-1] INFO  c.n.padel.service.CustomerService - Kund kalle_anka skapad framgångsrikt.
-2026-04-01 08:24:02 [http-nio-8584-exec-1] INFO  c.g.shared.logging.AuditLoggerAspect - wigell_admin created customer
-2026-04-01 08:24:35 [http-nio-8584-exec-14] INFO  c.nilsson.padel.service.CourtService - Uppdaterar bana med ID: 1
-2026-04-01 08:24:35 [http-nio-8584-exec-14] INFO  c.nilsson.padel.service.CourtService - Padelbana Court 1 - Super Panorama uppdaterad framgångsrikt.
-2026-04-01 08:24:35 [http-nio-8584-exec-14] INFO  c.g.shared.logging.AuditLoggerAspect - wigell_admin updated court
-2026-04-01 08:25:15 [http-nio-8584-exec-12] INFO  c.n.p.service.AvailabilityService - Hämtar alla lediga tider för bana 1 för datum 2026-04-15
-2026-04-01 08:25:37 [http-nio-8584-exec-24] INFO  c.n.p.service.AvailabilityService - Hämtar alla lediga tider för bana 2 för datum 2026-04-15
-2026-04-01 08:25:46 [http-nio-8584-exec-14] INFO  c.n.p.service.AvailabilityService - Hämtar alla lediga tider för bana 6 för datum 2026-04-15
-2026-04-01 08:26:00 [http-nio-8584-exec-20] INFO  c.n.p.service.AvailabilityService - Hämtar alla lediga tider för bana 5 för datum 2026-04-15
-2026-04-01 08:26:10 [http-nio-8584-exec-21] INFO  c.n.p.service.AvailabilityService - Hämtar alla lediga tider för bana 1 för datum 2026-04-15
-2026-04-01 08:26:21 [http-nio-8584-exec-22] INFO  c.n.padel.service.BookingService - Skapar ny bokning: Kund=2, Bana=1, Datum=2026-04-15
-2026-04-01 08:26:21 [http-nio-8584-exec-22] DEBUG c.n.padel.service.BookingService - Anropar valutatjänst för konvertering SEK -> EUR
-2026-04-01 08:26:22 [http-nio-8584-exec-22] INFO  c.n.padel.service.BookingService - Bokar bana 1 för kund 2. Pris: 450.00 SEK. Växelkurs: 0.09138
-2026-04-01 08:26:22 [http-nio-8584-exec-22] INFO  c.n.padel.service.BookingService - Bokning sparad med ID: 3
-2026-04-01 08:26:22 [http-nio-8584-exec-22] INFO  c.g.shared.logging.AuditLoggerAspect - wigell_user created booking
-2026-04-01 08:27:47 [http-nio-8584-exec-17] INFO  c.n.padel.service.BookingService - Hämtar alla bokningar för kund: 2
-2026-04-01 10:00:51 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
-2026-04-01 10:00:51 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
-2026-04-01 10:00:51 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-04-01 10:00:51 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-04-01 10:00:51 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-02 08:13:09 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-02 08:13:10 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-02 08:13:10 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-04-02 08:13:11 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 2 endpoints beneath base path '/actuator'
+2026-04-02 08:13:11 [main] INFO  o.s.v.b.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-04-02 08:13:11 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8584 (http) with context path '/'
+2026-04-02 08:13:11 [main] INFO  com.nilsson.padel.PadelApplication - Started PadelApplication in 5.266 seconds (process running for 5.625)
+2026-04-02 08:13:11 [registrationTask1] INFO  d.c.b.a.c.r.ApplicationRegistrator - Application registered itself as 082ffe52bd8b
+2026-04-02 08:13:11 [http-nio-8584-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-02 08:13:11 [http-nio-8584-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-02 08:13:11 [http-nio-8584-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2026-04-02 09:25:22 [http-nio-8584-exec-14] INFO  c.n.p.service.AvailabilityService - Hämtar alla lediga tider för bana 1 för datum 2026-04-15
+2026-04-02 09:25:27 [http-nio-8584-exec-23] INFO  c.n.padel.service.BookingService - Skapar ny bokning: Kund=2, Bana=1, Datum=2026-04-15
+2026-04-02 09:25:27 [http-nio-8584-exec-23] DEBUG c.n.padel.service.BookingService - Anropar valutatjänst för konvertering SEK -> EUR
+2026-04-02 09:25:27 [http-nio-8584-exec-23] INFO  c.n.padel.service.BookingService - Bokar bana 1 för kund 2. Pris: 400.00 SEK. Växelkurs: 0.09184
+2026-04-02 09:25:27 [http-nio-8584-exec-23] INFO  c.n.padel.service.BookingService - Bokning sparad med ID: 3
+2026-04-02 09:25:27 [http-nio-8584-exec-23] INFO  c.g.shared.logging.AuditLoggerAspect - wigell_user created booking
+2026-04-02 09:48:02 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-02 09:48:02 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-04-02 09:48:02 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-02 09:48:02 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-02 09:48:02 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
