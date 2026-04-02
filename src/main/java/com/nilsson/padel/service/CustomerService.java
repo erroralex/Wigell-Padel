@@ -8,9 +8,11 @@ import com.nilsson.padel.entity.Address;
 import com.nilsson.padel.entity.Customer;
 import com.nilsson.padel.repository.AddressRepository;
 import com.nilsson.padel.repository.CustomerRepository;
+import com.nilsson.padel.security.KeycloakUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -34,12 +36,14 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final AddressRepository addressRepository;
+    private final KeycloakUserService keycloakUserService;
 
     private final static Logger logger = LoggerFactory.getLogger(CustomerService.class);
 
-    public CustomerService(CustomerRepository customerRepository, AddressRepository addressRepository) {
+    public CustomerService(CustomerRepository customerRepository, AddressRepository addressRepository, KeycloakUserService keycloakUserService) {
         this.customerRepository = customerRepository;
         this.addressRepository = addressRepository;
+        this.keycloakUserService = keycloakUserService;
     }
 
     public List<CustomerResponse> getAllCustomers() {
@@ -56,22 +60,42 @@ public class CustomerService {
         return mapToResponse(customer);
     }
 
+    @Transactional
     public CustomerResponse createCustomer(CustomerRequest request) {
         logger.info("Skapar ny kund: {}", request.username());
 
-        Address address = addressRepository.findById(request.addressId())
-                .orElseThrow(() -> new ResourceNotFoundException("Adress med ID " + request.addressId() + " hittades inte."));
-
-        Customer customer = new Customer(
+        // 1. Skapa användaren i Keycloak först.
+        String keycloakId = keycloakUserService.createUserInKeycloak(
+                request.email(),
                 request.username(),
-                request.role(),
+                request.password(),
                 request.firstName(),
-                request.lastName(),
-                address
+                request.lastName()
         );
 
-        logger.info("Kund {} skapad framgångsrikt.", customer.getUsername());
-        return mapToResponse(customerRepository.save(customer));
+        try {
+            // 2. Befintlig logik för att spara i lokala databasen
+            Address address = addressRepository.findById(request.addressId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Adress med ID " + request.addressId() + " hittades inte."));
+
+            Customer customer = new Customer(
+                    request.username(),
+                    keycloakId,
+                    request.firstName(),
+                    request.lastName(),
+                    address
+            );
+
+            logger.info("Kund {} skapad framgångsrikt.", customer.getUsername());
+            return mapToResponse(customerRepository.save(customer));
+
+        } catch (Exception e) {
+            // 3. Kompenserande transaktion
+            logger.error("Kunde inte spara kund i DB. Rullar tillbaka Keycloak-användare: {}", keycloakId, e);
+            keycloakUserService.deleteUserInKeycloak(keycloakId);
+
+            throw new RuntimeException("Ett fel uppstod vid kundregistrering. Försök igen.", e);
+        }
     }
 
     public CustomerResponse updateCustomer(Long id, CustomerRequest request) {
@@ -84,7 +108,6 @@ public class CustomerService {
                 .orElseThrow(() -> new ResourceNotFoundException("Adress med ID " + request.addressId() + " hittades inte."));
 
         customer.setUsername(request.username());
-        customer.setRole(request.role());
         customer.setFirstName(request.firstName());
         customer.setLastName(request.lastName());
         customer.setAddress(newAddress);
@@ -151,7 +174,6 @@ public class CustomerService {
         return new CustomerResponse(
                 customer.getId(),
                 customer.getUsername(),
-                customer.getRole(),
                 customer.getFirstName(),
                 customer.getLastName(),
                 addressRecord

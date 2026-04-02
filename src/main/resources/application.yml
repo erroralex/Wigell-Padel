@@ -40,6 +40,13 @@ management:
     env:
       enabled: true
 
+keycloak:
+  admin:
+    server-url: http://localhost:8180
+    realm: wigell-realm
+    client-id: wigell-padel-client
+    client-secret: din-hemliga-kod-här # Hämta denna från 'Credentials' fliken i Keycloak
+
 logging:
   level:
     root: INFO

@@ -1,11 +1,11 @@
 package com.nilsson.padel.dto;
 
-public record CustomerRequest(
+public record CustomerRegistrationRequest(
         String username,
+        String role,
         String firstName,
         String lastName,
         String email,
-        String password,
-        Long addressId
+        String password
 ) {
 }

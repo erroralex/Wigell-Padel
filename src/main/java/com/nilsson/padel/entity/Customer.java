@@ -29,8 +29,8 @@ public class Customer {
     @Column(nullable = false, unique = true, length = 50)
     private String username;
 
-    @Column(nullable = false, length = 50)
-    private String role;
+    @Column(name = "keycloak_id", unique = true, nullable = false)
+    private String keycloakId;
 
     @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
@@ -45,9 +45,9 @@ public class Customer {
     protected Customer() {
     }
 
-    public Customer(String username, String role, String firstName, String lastName, Address address) {
+    public Customer(String username, String keycloakId, String firstName, String lastName, Address address) {
         this.username = username;
-        this.role = role;
+        this.keycloakId = keycloakId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -65,12 +65,12 @@ public class Customer {
         this.username = username;
     }
 
-    public String getRole() {
-        return role;
+    public String getKeycloakId() {
+        return keycloakId;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setKeycloakId(String keycloakId) {
+        this.keycloakId = keycloakId;
     }
 
     public String getFirstName() {

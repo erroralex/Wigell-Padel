@@ -18,12 +18,12 @@ CREATE TABLE address
 
 CREATE TABLE customer
 (
-    id         BIGINT AUTO_INCREMENT PRIMARY KEY,
-    username   VARCHAR(50)  NOT NULL UNIQUE,
-    role       VARCHAR(50)  NOT NULL,
-    first_name VARCHAR(100) NOT NULL,
-    last_name  VARCHAR(100) NOT NULL,
-    address_id BIGINT       NOT NULL,
+    id          BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username    VARCHAR(50)  NOT NULL UNIQUE,
+    keycloak_id VARCHAR(36)  NOT NULL UNIQUE,
+    first_name  VARCHAR(100) NOT NULL,
+    last_name   VARCHAR(100) NOT NULL,
+    address_id  BIGINT       NOT NULL,
     FOREIGN KEY (address_id) REFERENCES address (id)
 );
 
@@ -55,12 +55,12 @@ VALUES ('Padelgatan 1', 'Stockholm', '11122', 'Sverige'),
        ('Tennisvägen 5', 'Göteborg', '41233', 'Sverige'),
        ('Sportgränd 9', 'Malmö', '21144', 'Sverige');
 
-INSERT INTO customer (username, role, first_name, last_name, address_id)
-VALUES ('admin', 'ROLE_ADMIN', 'Boss', 'Wigell', 1),
-       ('anna99', 'ROLE_USER', 'Anna', 'Andersson', 1),
-       ('bjorn_p', 'ROLE_USER', 'Björn', 'Borg', 2),
-       ('cecilia', 'ROLE_USER', 'Cecilia', 'Lind', 3),
-       ('david_d', 'ROLE_USER', 'David', 'Dalin', 2);
+INSERT INTO customer (username, keycloak_id, first_name, last_name, address_id)
+VALUES ('admin', '11111111-1111-1111-1111-111111111111', 'Boss', 'Wigell', 1),
+       ('anna99', '22222222-2222-2222-2222-222222222222', 'Anna', 'Andersson', 1),
+       ('bjorn_p', '33333333-3333-3333-3333-333333333333', 'Björn', 'Borg', 2),
+       ('cecilia', '44444444-4444-4444-4444-444444444444', 'Cecilia', 'Lind', 3),
+       ('david_d', '55555555-5555-5555-5555-555555555555', 'David', 'Dalin', 2);
 
 INSERT INTO court (name, description, is_indoor, price_per_hour_sek)
 VALUES ('Court 1 - Panorama', 'Inomhusbana med panoramaglas', TRUE, 400.00),
