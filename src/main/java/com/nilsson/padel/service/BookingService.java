@@ -13,6 +13,9 @@ import com.nilsson.padel.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -55,6 +58,7 @@ public class BookingService {
     }
 
     public BookingResponse createBooking(BookingRequest request) {
+        validateUserOwnership(request.customerId());
 
         logger.info("Skapar ny bokning: Kund={}, Bana={}, Datum={}",
                 request.customerId(), request.courtId(), request.bookingDate());
@@ -99,6 +103,8 @@ public class BookingService {
         Booking existingBooking = bookingRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Bokning med ID " + id + " hittades inte."));
 
+        validateUserOwnership(existingBooking.getCustomer().getId());
+
         existingBooking.setBookingDate(request.bookingDate());
         existingBooking.setStartTime(request.startTime());
         existingBooking.setNumberOfPlayers(request.numberOfPlayers());
@@ -136,6 +142,8 @@ public class BookingService {
     public List<BookingResponse> getBookingsByCustomer(Long customerId) {
         logger.info("Hämtar alla bokningar för kund: {}", customerId);
 
+        validateUserOwnership(customerId);
+
         if (!customerRepository.existsById(customerId)) {
             throw new ResourceNotFoundException("Kund med ID " + customerId + " hittades inte.");
         }
@@ -159,6 +167,25 @@ public class BookingService {
         }
         bookingRepository.deleteById(id);
         logger.info("Bokning {} raderad framgångsrikt.", id);
+    }
+
+    private void validateUserOwnership(Long targetCustomerId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean isAdmin = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+        if (isAdmin) {
+            return;
+        }
+
+        String currentKeycloakId = auth.getName();
+
+        Customer targetCustomer = customerRepository.findById(targetCustomerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Kunden hittades inte."));
+
+        if (!targetCustomer.getKeycloakId().equals(currentKeycloakId)) {
+            throw new AccessDeniedException("Åtkomst nekad: Du har inte behörighet att hantera denna resurs.");
+        }
     }
 
     private BookingResponse mapToResponse(Booking booking) {
