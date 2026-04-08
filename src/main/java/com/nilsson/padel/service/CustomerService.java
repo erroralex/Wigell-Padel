@@ -69,7 +69,8 @@ public class CustomerService {
                 request.username(),
                 request.password(),
                 request.firstName(),
-                request.lastName()
+                request.lastName(),
+                "USER"
         );
 
         try {

@@ -34,7 +34,7 @@ public class KeycloakUserService {
         this.realm = realm;
     }
 
-    public String createUserInKeycloak(String email, String username, String password, String firstName, String lastName) {
+    public String createUserInKeycloak(String email, String username, String password, String firstName, String lastName, String roleName) {
         logger.info("Försöker skapa användare {} i Keycloak...", username);
 
         UserRepresentation user = new UserRepresentation();
@@ -61,7 +61,7 @@ public class KeycloakUserService {
         String keycloakId = CreatedResponseUtil.getCreatedId(response);
         logger.info("Användare skapad i Keycloak med ID: {}", keycloakId);
 
-        assignUserRole(keycloakId);
+        assignUserRole(keycloakId, roleName);
 
         return keycloakId;
     }
@@ -76,10 +76,9 @@ public class KeycloakUserService {
         }
     }
 
-    private void assignUserRole(String userId) {
-        RoleRepresentation userRole = keycloak.realm(realm).roles().get("USER").toRepresentation();
-
+    private void assignUserRole(String userId, String roleName) {
+        RoleRepresentation userRole = keycloak.realm(realm).roles().get(roleName).toRepresentation();
         keycloak.realm(realm).users().get(userId).roles().realmLevel().add(Collections.singletonList(userRole));
-        logger.info("Rollen 'USER' tilldelad till Keycloak-användare: {}", userId);
+        logger.info("Rollen '{}' tilldelad till Keycloak-användare: {}", roleName, userId);
     }
 }

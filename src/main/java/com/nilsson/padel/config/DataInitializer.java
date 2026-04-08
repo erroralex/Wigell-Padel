@@ -42,19 +42,19 @@ public class DataInitializer {
                 Address addr3 = addressRepository.save(new Address("Sportgränd 9", "Malmö", "21144", "Sverige"));
 
                 try {
-                    String adminId = keycloakUserService.createUserInKeycloak("admin@wigell.se", "admin", "admin123", "Boss", "Wigell");
+                    String adminId = keycloakUserService.createUserInKeycloak("admin@wigell.se", "admin", "admin123", "Boss", "Wigell", "ADMIN");
                     Customer adminCustomer = new Customer("admin", adminId, "Boss", "Wigell", addr1);
 
-                    String annaId = keycloakUserService.createUserInKeycloak("anna@padel.se", "anna99", "password", "Anna", "Andersson");
+                    String annaId = keycloakUserService.createUserInKeycloak("anna@padel.se", "anna99", "password", "Anna", "Andersson", "USER");
                     Customer annaCustomer = new Customer("anna99", annaId, "Anna", "Andersson", addr1);
 
-                    String bjornId = keycloakUserService.createUserInKeycloak("bjorn@padel.se", "bjorn_p", "password", "Björn", "Borg");
+                    String bjornId = keycloakUserService.createUserInKeycloak("bjorn@padel.se", "bjorn_p", "password", "Björn", "Borg", "USER");
                     Customer bjornCustomer = new Customer("bjorn_p", bjornId, "Björn", "Borg", addr2);
 
-                    String ceciliaId = keycloakUserService.createUserInKeycloak("cecilia@padel.se", "cecilia", "password", "Cecilia", "Lind");
+                    String ceciliaId = keycloakUserService.createUserInKeycloak("cecilia@padel.se", "cecilia", "password", "Cecilia", "Lind", "USER");
                     Customer ceciliaCustomer = new Customer("cecilia", ceciliaId, "Cecilia", "Lind", addr3);
 
-                    String davidId = keycloakUserService.createUserInKeycloak("david@padel.se", "david_d", "password", "David", "Dalin");
+                    String davidId = keycloakUserService.createUserInKeycloak("david@padel.se", "david_d", "password", "David", "Dalin", "USER");
                     Customer davidCustomer = new Customer("david_d", davidId, "David", "Dalin", addr2);
 
                     customerRepository.saveAll(List.of(adminCustomer, annaCustomer, bjornCustomer, ceciliaCustomer, davidCustomer));
