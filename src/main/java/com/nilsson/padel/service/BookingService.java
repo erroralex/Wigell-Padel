@@ -84,7 +84,7 @@ public class BookingService {
                 priceSek
         );
 
-        newBooking.setTotalPriceEuro(priceEur);
+        newBooking.setTotalPriceEur(priceEur);
 
         Booking savedBooking = bookingRepository.save(newBooking);
 
@@ -116,7 +116,7 @@ public class BookingService {
             BigDecimal newPriceEur = newPriceSek.multiply(BigDecimal.valueOf(exchangeRate)).setScale(2, RoundingMode.HALF_UP);
 
             existingBooking.setTotalPriceSek(newPriceSek);
-            existingBooking.setTotalPriceEuro(newPriceEur);
+            existingBooking.setTotalPriceEur(newPriceEur);
 
             logger.debug("Nytt pris för bokning {}: {} SEK", id, newPriceSek);
         }
@@ -171,7 +171,7 @@ public class BookingService {
                 booking.getStartTime(),
                 booking.getNumberOfPlayers(),
                 booking.getTotalPriceSek(),
-                booking.getTotalPriceEuro()
+                booking.getTotalPriceEur()
         );
     }
 }

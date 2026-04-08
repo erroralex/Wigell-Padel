@@ -51,7 +51,7 @@ public class Booking {
     private BigDecimal totalPriceSek;
 
     @Column(name = "total_price_eur", precision = 10, scale = 2)
-    private BigDecimal totalPriceEuro;
+    private BigDecimal totalPriceEur;
 
     protected Booking() {
     }
@@ -117,11 +117,11 @@ public class Booking {
         this.totalPriceSek = totalPriceSek;
     }
 
-    public BigDecimal getTotalPriceEuro() {
-        return totalPriceEuro;
+    public BigDecimal getTotalPriceEur() {
+        return totalPriceEur;
     }
 
-    public void setTotalPriceEuro(BigDecimal totalPriceEuro) {
-        this.totalPriceEuro = totalPriceEuro;
+    public void setTotalPriceEur(BigDecimal totalPriceEur) {
+        this.totalPriceEur = totalPriceEur;
     }
 }

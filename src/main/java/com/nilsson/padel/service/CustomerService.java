@@ -64,7 +64,6 @@ public class CustomerService {
     public CustomerResponse createCustomer(CustomerRequest request) {
         logger.info("Skapar ny kund: {}", request.username());
 
-        // 1. Skapa användaren i Keycloak först.
         String keycloakId = keycloakUserService.createUserInKeycloak(
                 request.email(),
                 request.username(),
@@ -74,7 +73,6 @@ public class CustomerService {
         );
 
         try {
-            // 2. Befintlig logik för att spara i lokala databasen
             Address address = addressRepository.findById(request.addressId())
                     .orElseThrow(() -> new ResourceNotFoundException("Adress med ID " + request.addressId() + " hittades inte."));
 
@@ -90,7 +88,6 @@ public class CustomerService {
             return mapToResponse(customerRepository.save(customer));
 
         } catch (Exception e) {
-            // 3. Kompenserande transaktion
             logger.error("Kunde inte spara kund i DB. Rullar tillbaka Keycloak-användare: {}", keycloakId, e);
             keycloakUserService.deleteUserInKeycloak(keycloakId);
 

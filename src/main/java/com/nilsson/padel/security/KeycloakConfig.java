@@ -11,34 +11,34 @@ import org.springframework.context.annotation.Configuration;
  * ──────────────────────────────────────────────
  * <h2>KeycloakConfig</h2>
  * ──────────────────────────────────────────────
- * <p><strong>Ansvar:</strong> Konfigurerar och tillhandahåller Keycloak Admin Client
- * som en Spring Bean. Används för att systemet ska kunna hantera användare (skapa/ta bort)
- * via Keycloaks REST API med Client Credentials Grant (service account).</p>
+ * <p><strong>Ansvar:</strong> Konfigurerar Keycloak Admin Client.
+ * Använder en dedikerad admin-klient för att säkert kunna skapa
+ * och hantera användare via Client Credentials Grant.</p>
  * ──────────────────────────────────────────────
  */
 @Configuration
 public class KeycloakConfig {
 
-    @Value("${keycloak.admin.server-url}")
+    @Value("${keycloak.server-url}")
     private String serverUrl;
 
-    @Value("${keycloak.admin.realm}")
+    @Value("${keycloak.realm}")
     private String realm;
 
-    @Value("${keycloak.admin.client-id}")
-    private String clientId;
+    @Value("${keycloak.admin-client.client-id}")
+    private String adminClientId;
 
-    @Value("${keycloak.admin.client-secret}")
-    private String clientSecret;
+    @Value("${keycloak.admin-client.client-secret}")
+    private String adminClientSecret;
 
     @Bean
     public Keycloak keycloak() {
         return KeycloakBuilder.builder()
                 .serverUrl(serverUrl)
                 .realm(realm)
+                .clientId(adminClientId)
+                .clientSecret(adminClientSecret)
                 .grantType(OAuth2Constants.CLIENT_CREDENTIALS)
-                .clientId(clientId)
-                .clientSecret(clientSecret)
                 .build();
     }
 }
