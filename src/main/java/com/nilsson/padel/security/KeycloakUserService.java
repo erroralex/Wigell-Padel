@@ -29,7 +29,7 @@ public class KeycloakUserService {
 
     private static final Logger logger = LoggerFactory.getLogger(KeycloakUserService.class);
 
-    public KeycloakUserService(Keycloak keycloak, @Value("${keycloak.admin.realm}") String realm) {
+    public KeycloakUserService(Keycloak keycloak, @Value("${keycloak.realm}") String realm) {
         this.keycloak = keycloak;
         this.realm = realm;
     }
