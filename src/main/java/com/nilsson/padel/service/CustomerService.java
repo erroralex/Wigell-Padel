@@ -5,8 +5,10 @@ import com.nilsson.padel.dto.AddressRecord;
 import com.nilsson.padel.dto.CustomerRequest;
 import com.nilsson.padel.dto.CustomerResponse;
 import com.nilsson.padel.entity.Address;
+import com.nilsson.padel.entity.Booking;
 import com.nilsson.padel.entity.Customer;
 import com.nilsson.padel.repository.AddressRepository;
+import com.nilsson.padel.repository.BookingRepository;
 import com.nilsson.padel.repository.CustomerRepository;
 import com.nilsson.padel.security.KeycloakUserService;
 import org.slf4j.Logger;
@@ -37,13 +39,15 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final AddressRepository addressRepository;
     private final KeycloakUserService keycloakUserService;
+    private final BookingRepository bookingRepository;
 
     private final static Logger logger = LoggerFactory.getLogger(CustomerService.class);
 
-    public CustomerService(CustomerRepository customerRepository, AddressRepository addressRepository, KeycloakUserService keycloakUserService) {
+    public CustomerService(CustomerRepository customerRepository, AddressRepository addressRepository, KeycloakUserService keycloakUserService, BookingRepository bookingRepository) {
         this.customerRepository = customerRepository;
         this.addressRepository = addressRepository;
         this.keycloakUserService = keycloakUserService;
+        this.bookingRepository = bookingRepository;
     }
 
     public List<CustomerResponse> getAllCustomers() {
@@ -114,13 +118,23 @@ public class CustomerService {
         return mapToResponse(customerRepository.save(customer));
     }
 
+    @Transactional
     public void deleteCustomer(Long id) {
         logger.warn("Raderar kund med ID: {}", id);
 
-        if (!customerRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Kunde inte radera: Kund med ID " + id + " hittades inte.");
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Kunde inte radera: Kund med ID " + id + " hittades inte."));
+
+        List<Booking> bookings = bookingRepository.findByCustomerId(id);
+        if (!bookings.isEmpty()) {
+            logger.info("Raderar {} bokningar kopplade till kunden.", bookings.size());
+            bookingRepository.deleteAll(bookings);
         }
-        customerRepository.deleteById(id);
+
+        keycloakUserService.deleteUserInKeycloak(customer.getKeycloakId());
+
+        customerRepository.delete(customer);
+
         logger.info("Kund {} raderad framgångsrikt.", id);
     }
 
